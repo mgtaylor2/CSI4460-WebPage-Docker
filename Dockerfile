@@ -19,6 +19,10 @@ RUN addgroup -S apacheuser && adduser -S apacheuser -G apacheuser
 # Change ownership of the htdocs directory to the new user
 RUN chown -R apacheuser:apacheuser /usr/local/apache2/htdocs/
 
+# Change ownership and permissions of the logs directory
+# This command needs to be after the creation of apacheuser
+RUN mkdir -p /usr/local/apache2/logs/ && chown -R apacheuser:apacheuser /usr/local/apache2/logs/
+
 # Run Apache as non-root user
 USER apacheuser
 
